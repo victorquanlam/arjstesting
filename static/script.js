@@ -50,26 +50,6 @@ async function loadPlaceFromAPIs(position) {
 };
 
 
-// add random marker
-function addRandomMarker() {
-    if(currentLocation){
-
-    await fetch('location', {
-        method: 'POST',
-        body: currentLocation, // string or object
-        headers: {
-        'Content-Type': 'application/json'
-        }
-    });
-
-        
-    } else {
-        window.alert('Cannot find your current location')
-    }
-    
-}
-
-
 window.onload = () => {
     const scene = document.querySelector('a-scene');
 
