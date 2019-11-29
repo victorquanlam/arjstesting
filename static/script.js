@@ -73,9 +73,6 @@ const addRandomMarker = function () {
 
 
 window.onload = () => {
-
-    document.getElementsById('addNewMarkerBtn').addEventListener("click", function(){ alert("Hello World!"); });
-
     const scene = document.querySelector('a-scene');
 
     // first get current user location
