@@ -6,7 +6,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>AR.js project</title>
 
-    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" href="{{ secure_asset('static/AdminLTE.min.css') }}">
 
     <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase.js"></script>
     <!-- inclue ar.js framework -->
@@ -16,7 +16,7 @@
         THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
     </script>
 
-    <script type="text/javascript" src="/static/script.js"></script>
+    <script type="text/javascript" src="{{ secure_asset('/static/script.js) }}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body style='margin: 0; overflow: hidden;'>
