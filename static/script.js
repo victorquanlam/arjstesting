@@ -57,10 +57,11 @@ async function loadPlaceFromAPIs(position) {
         })
     } else if (loadMode ==='server'){
         result = await fetch('/locations').then(
+           
             res => res.json()
         )
     }
-    
+    console.log(result)
     return result
 };
 const getRandomLocationNumber = function(){
