@@ -21,6 +21,7 @@ firebase.initializeApp({
 
 var database = firebase.database();
 
+//get all locations
 app.get('/locations', async (request, response) => {
     try {
         let result = []
@@ -29,7 +30,7 @@ app.get('/locations', async (request, response) => {
         locations.forEach(function(snapshot) {
             result.push({
                 name:snapshot.val().name,
-                desciption:snapshot.val().desciption?snapshot.val().desciption:'Empty Description',
+                desciption:snapshot.val().description?snapshot.val().description:'Empty Description',
                 location: {
                     lat:snapshot.val().lat,
                     lng:snapshot.val().lng,
@@ -46,6 +47,32 @@ app.get('/locations', async (request, response) => {
   
 });
 
+app.post('/location', async(request, response) => {
+  try {
+    let result = []
+    const locationsRef = database.ref('locations');
+    
+    let randomLat = request.latitude + getRandomLocationNumber()
+    let randomLng = request.longitude + getRandomLocationNumber()
+
+    locationsRef.push({
+      name: 'Random Test Name',
+      lat:  randomLat,
+      lng:  randomLng
+    }).then(
+        window.alert('Lat:'+ randomLat + ', Long:' + randomLng)
+        ).then(
+            window.location.reload()
+    )
+
+} catch(error){
+
+  response.status(500).send(error);
+
+}
+})
+
+//set index.html as our first page 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -58,3 +85,6 @@ app.listen(process.env.PORT || 4000, function(){
 
 
 
+const getRandomLocationNumber = function(){
+  return Math.floor(Math.random() * (0.009 - 0.001)) + 0.001
+}

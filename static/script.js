@@ -1,19 +1,4 @@
- // Initialize Firebase
- var config = {
-    apiKey: "AIzaSyAXLtvnwX3bcsPAqpGZYuePdElYbQp5j3s",
-    authDomain: "arjsproject.firebaseapp.com",
-    databaseURL: "https://arjsproject.firebaseio.com",
-    projectId: "arjsproject",
-    storageBucket: "arjsproject.appspot.com",
-    messagingSenderId: "1027437475576",
-    appId: "1:1027437475576:web:a2ec36de801067855b6d0d",
-    measurementId: "G-3MWNQZ3XFE"
-  };
-  firebase.initializeApp(config);
-
-  var database = firebase.database();
-
-  var currentLocation;
+var currentLocation;
 
   const loadPlaces = function (coords) {
     // COMMENT FOLLOWING LINE IF YOU WANT TO USE STATIC DATA AND ADD COORDINATES IN THE FOLLOWING 'PLACES' ARRAY
@@ -48,7 +33,7 @@ async function loadPlaceFromAPIs(position) {
         locations.forEach(function(snapshot) {
             result.push({
                 name:snapshot.val().name,
-                desciption:snapshot.val().desciption?snapshot.val().desciption:'Empty Description',
+                desciption:snapshot.val().description?snapshot.val().description:'Empty Description',
                 location: {
                     lat:snapshot.val().lat,
                     lng:snapshot.val().lng,
@@ -64,27 +49,22 @@ async function loadPlaceFromAPIs(position) {
     console.log(result)
     return result
 };
-const getRandomLocationNumber = function(){
-   return Math.floor(Math.random() * (0.009 - 0.001)) + 0.001
-}
+
 
 // add random marker
-function addRandomMarker() {
+const addRandomMarker = function () {
+    console.log('test')
     if(currentLocation){
-    let randomLat = currentLocation.latitude + getRandomLocationNumber()
-    let randomLng = currentLocation.longitude + getRandomLocationNumber()
-    const locationsRef = database.ref('locations');
-    
-        console.log(currentLocation)
-        locationsRef.push({
-            name: 'Random Test Name',
-            lat:  randomLat,
-            lng:  randomLng
-        }).then(
-            window.alert('Lat:'+ randomLat + ', Long:' + randomLng)
-            ).then(
-                window.location.reload()
-        )
+
+    await fetch('location', {
+        method: 'POST',
+        body: currentLocation, // string or object
+        headers: {
+        'Content-Type': 'application/json'
+        }
+    });
+
+        
     } else {
         window.alert('Cannot find your current location')
     }
@@ -93,6 +73,9 @@ function addRandomMarker() {
 
 
 window.onload = () => {
+
+    document.getElementsById('addNewMarkerBtn').addEventListener("click", function(){ alert("Hello World!"); });
+
     const scene = document.querySelector('a-scene');
 
     // first get current user location
