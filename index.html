@@ -22,9 +22,9 @@
   </head>
   <body style='margin: 0; overflow: hidden;'>
     <!-- diable add new button because it doesn't work on the server -->
-    <!-- <a class="float" id="addNewMarkerBtn" onclick="addRandomMarker()">
+    <a class="float" onclick="addRandomMarker()">
       <i class="fa fa-plus my-float"></i>
-      </a> -->
+      </a>
     <a-scene
     cursor='rayOrigin: mouse; fuse: true; fuseTimeout: 0;'
     raycaster="objects: [gps-entity-place];"
