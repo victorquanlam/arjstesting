@@ -53,7 +53,6 @@ async function loadPlaceFromAPIs(position) {
 
 // add random marker
 const addRandomMarker = function () {
-    console.log('test')
     if(currentLocation){
 
     await fetch('location', {
